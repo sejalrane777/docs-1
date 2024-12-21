@@ -21,6 +21,9 @@ If a project ID is configured, the messages will be uploaded to the cloud storag
 <ParamField path="max_files" type="int" optional>
   Maximum number of files to upload. Defaults to 1. Maximum value is 10.
 </ParamField>
+<ParamField path="error_msg" type="str" optional>
+  Error message will display when the user doesn't provide the expected output.
+</ParamField>
 <ParamField path="timeout" type="int" optional>
   The number of seconds to wait for an answer before raising a TimeoutError.
 </ParamField>
@@ -71,3 +74,17 @@ file = await cl.AskFileMessage(
         content="Please upload a python file to begin!", accept={"text/plain": [".py"]}
       ).send()
 ```
+
+
+you can also display an error message when the user doesn't provide the expected output.
+```python Ask for a python file
+import chainlit as cl
+
+file = await cl.AskFileMessage(
+        content="Please upload a python file to begin!", accept={"text/plain": [".py"],error_msg='Files size should be less than 2 MB}
+      ).send()
+```
+
+
+
+
